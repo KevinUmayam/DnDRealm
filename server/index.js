@@ -12,17 +12,18 @@ import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
 import postRoutes from "./routes/posts.js";
 // char
-import characterRoutes from "./routes/posts.js";
+import characterRoutes from "./routes/characters.js";
 // char
 import { register } from "./controllers/auth.js";
 import { createPost } from "./controllers/posts.js";
 // char
-import { createCharacter } from "./controllers/posts.js";
+import { createCharacter } from "./controllers/characters.js";
 // char
 import { verifyToken } from "./middleware/auth.js";
 import User from "./models/User.js";
 import Post from "./models/Post.js";
-import { users, posts } from "./data/index.js";
+import Character from "./models/Character.js";
+import { users, posts, characters } from "./data/index.js";
 
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url);
@@ -72,5 +73,6 @@ mongoose
     /* ADD DATA ONE TIME */
     // User.insertMany(users);
     // Post.insertMany(posts);
+    // Character.insertMany(characters);
   })
   .catch((error) => console.log(`${error} did not connect`));

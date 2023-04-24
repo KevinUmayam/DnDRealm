@@ -65,6 +65,11 @@ const characterSchema = new mongoose.Schema({
         type: Boolean,
         required: true,
     },
+    gender: {
+        type: String,
+        required: true,
+        trim: true,
+    },
 });
 
 const Character = mongoose.model("Character", characterSchema);
