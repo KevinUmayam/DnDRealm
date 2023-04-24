@@ -5,7 +5,7 @@ const characterSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    name: {
+    charName: {
         type: String,
         required: true,
         trim: true,
@@ -59,6 +59,10 @@ const characterSchema = new mongoose.Schema({
     },
     charisma: {
         type: Number,
+        required: true,
+    },
+    imported: {
+        type: Boolean,
         required: true,
     },
 });
