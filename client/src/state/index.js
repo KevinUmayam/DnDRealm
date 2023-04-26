@@ -39,15 +39,18 @@ export const authSlice = createSlice({
             });
             state.posts = updatedPosts;
         },
-        // setCharacters: (state, action) => {
-        //     state.characters = action.payload.characters;
-        // },
-        // setCharacter: (state, action) => {
-        //     const updatedCharacters = state.characters.map((character) => {
-        //         if (character._id === action.payload.character._id) return action.payload.character;
-        //         return character;
-        //     });
-        //     state.characters = updatedCharacters;
-        // },
+        setCharacters: (state, action) => {
+            state.characters = action.payload.characters;
+        },
+        setCharacter: (state, action) => {
+            const updatedCharacters = state.characters.map((character) => {
+                if (character._id === action.payload.character._id) return action.payload.character;
+                return character;
+            });
+            state.characters = updatedCharacters;
+        },
     },
 });
+export const { setMode, setLogin, setLogout, setFriends, setPosts, setPost, setCharacters, setCharacter } =
+    authSlice.actions;
+export default authSlice.reducer;
