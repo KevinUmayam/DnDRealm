@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Box,
   IconButton,
@@ -21,15 +20,15 @@ import {
   Close,
 } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { setMode, setLogout } from "state";
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
 
-const Navbar = () => {
+const Navbar = ({ userId }) => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((state) => state.user);
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
   const theme = useTheme();
@@ -39,9 +38,35 @@ const Navbar = () => {
   const primaryLight = theme.palette.primary.light;
   const alt = theme.palette.background.alt;
 
-  const fullName = `${user.firstName} ${user.lastName}`;
+  const [user, setUser] = useState(null);
+  const token = useSelector((state) => state.token);
 
-  return (
+  const getUser = async () => {
+    const response = await fetch(`http://localhost:3001/users/${userId}`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await response.json();
+    setUser(data);
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []); 
+
+  if (!user) {
+    return null;
+  }
+
+const {
+    firstName,
+    lastName,
+  } = user;
+
+
+  const fullName = user ? `${user.firstName} ${user.lastName}` : '';
+
+ return (
     <FlexBetween padding="1rem 6%" backgroundColor={alt}>
       <FlexBetween gap="1.75rem">
         <Typography
