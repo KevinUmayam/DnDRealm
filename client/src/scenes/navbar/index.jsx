@@ -41,7 +41,7 @@ const Navbar = ({ userId }) => {
   const [user, setUser] = useState(null);
   const token = useSelector((state) => state.token);
 
-  const getUser = async () => {
+ const getUser = async () => {
     const response = await fetch(`http://localhost:3001/users/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
@@ -52,19 +52,18 @@ const Navbar = ({ userId }) => {
 
   useEffect(() => {
     getUser();
-  }, []); 
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!user) {
     return null;
   }
 
-const {
+  const {
     firstName,
     lastName,
   } = user;
 
-
-  const fullName = user ? `${user.firstName} ${user.lastName}` : '';
+  const fullName = user ? `${firstName} ${lastName}` : '';
 
  return (
     <FlexBetween padding="1rem 6%" backgroundColor={alt}>
